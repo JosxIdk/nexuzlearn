@@ -44,6 +44,7 @@ app.use(`/`, require(`./routes/users.js`))
 
 
 const port = process.env.SERVER_PORT || 5000
+console.log(port)
 
 app.listen(port, ()=>{
     console.log(`listening on port ${port}`)
