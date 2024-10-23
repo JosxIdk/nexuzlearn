@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include(`./partials/navbar`)%>
+    <div id="containerhome">
+        <div id="firstcontent">
+            <div id="textcontent">
+                <h1 id="title">Aprende de una manera <span id="highlight">MAS</span> divertida</h1>
+                <a href="/register">
+                    <button class="start-button">
+                        Get started
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </a>
+            </div>
+            <div id="imagecontent">
+                <img src="/public/image1.png" id="pc">
+            </div>
+        </div>
+        
+        <div id="explainsection">
+            <div id="templatescomplete">
+                <div class="templates" id="template1">
+                    <img src="/public/register1.png" class="explainimgs">
+                    <h3 class="explainntittle">Registrate en el sitio</h3>
+                    <p class="explainnp">Empieza registrandote para empezar a aprender mas.</p>
+                </div>
+                <img src="/public/line1yes.png" class="lines">
+                <div class="templates" id="template2">
+                    <img src="/public/register2.png" class="explainimgs">
+                    <h3 class="explainntittle">Ajusta tu perfil</h3>
+                    <p class="explainnp">Elige los temas que te gustaria reforzar y comienza a aprender.</p>
+                </div>
+                <img src="/public/line2.png" id="lines2" class="lines">
+                <div class="templates" id="template3">
+                    <img src="/public/register3.png" class="explainimgs">
+                    <h3 class="explainntittle">Areás de oportunidad</h3>
+                    <p class="explainnp">Mira cuales son tus areas de oportunidad y en base a ellas sigue mejorando más.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="explainsection2">
+            <section class="faq-section">
+                <h2>Preguntas frecuentes</h2>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué es Nexuz?</button>
+                    <div class="faq-answer">
+                        <p>Nexuz es una plataforma de aprendizaje totalmente gratuita que se ajusta a tus necesidades para ayudarte a reforzar en temas que necesites!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo funciona Nexuz?</button>
+                    <div class="faq-answer">
+                        <p>Nexuz funciona por medio de inteligencia artificial, simplemente se adapta a tu perfil y en base a ello, obtienes una capacitacion totalmente personalizada.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo uso Nexuz?</button>
+                    <div class="faq-answer">
+                        <p>Para empezar tu recorrido por Nexuz, es tan sencillo como primero crear una cuenta, despues indicar tu perfil, y comenzar a aprender!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Necesito pagar para aprender?</button>
+                    <div class="faq-answer">
+                        <p>No, Nexuz es totalmente de uso gratuito y está pensada especificamente para aprender de una forma más interactiva.</p>
+                    </div>
+                </div>                
+            </section>
+        </div>
+    </div>
+    <script src="/public/script.js"></script>
+    <script src="/public/loadertemplate.js"></script>
+    <%- include(`./partials/footer`)%>
+</body>
+</html>

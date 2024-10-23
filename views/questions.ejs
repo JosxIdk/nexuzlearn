@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de conocimientos</title>
+    <link rel="stylesheet" href="/public/questions.css">
+</head>
+
+<body>
+    <%- include(`./partials/navbar`)%>
+        <div class="question-container">
+            <div class="question-card">
+                <h2>Pregunta <span id="question-number"></span> de 15</h2>
+                <p id="question-text">Cargando pregunta...</p>
+                <input type="text" id="answer-input" placeholder="Ingresa tu respuesta aquí">
+                <div class="question-buttons">
+                    <button id="submit-button">Entregar</button>
+                    <button id="skip-button">No sé</button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+        <%- include(`./partials/footer`)%>
+</body>
+
+<script>
+    let currentQuestionIndex = 1;  // Valor inicial de la pregunta actual
+    let totalAnswered = 0;
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
+    const maxQuestions = 15;
+    const topic = '<%= topic %>';
+    const user = '<%= user.name %>'
+    console.log(user)
+    console.log('Topic:', topic);
+
+    async function loadProgress() {
+        try {
+            const response = await fetch(`/dashboard/${topic}/progress?username=${user}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cargar el progreso');
+            }
+
+            console.log(response)
+
+            const data = await response.json();
+            console.log(data)
+            currentQuestionIndex = data.currentQuestionIndex || 1; // Cargar el índice guardado o iniciar en 1
+        } catch (error) {
+            console.error('Error cargando el progreso:', error);
+            currentQuestionIndex = 1; // Si hay error, empezar en 1
+        }
+    }
+
+    // Función para cargar una nueva pregunta
+    async function loadQuestion() {
+        try {
+            const response = await fetch(`/dashboard/${topic}/questions`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cargar la pregunta');
+            }
+
+            const data = await response.json();
+            console.log('Pregunta cargada:', data);
+            document.getElementById('question-text').innerHTML = data.question;
+            document.getElementById('question-number').textContent = currentQuestionIndex;
+        } catch (error) {
+            console.error('Error cargando la pregunta:', error);
+            document.getElementById('question-text').textContent = 'Error al cargar la pregunta.';
+        }
+    }
+
+    // Función para actualizar la barra de progreso
+    function updateProgressBar() {
+        const progressBarFill = document.getElementById('progress-bar');
+        const progress = ((currentQuestionIndex) / maxQuestions) * 100;
+        progressBarFill.style.width = progress + '%';
+    }
+
+    document.getElementById('submit-button').addEventListener('click', async () => {
+        const answerInput = document.getElementById('answer-input').value;
+        const question = document.getElementById('question-text').textContent;
+
+        try {
+            const response = await fetch(`/dashboard/${topic}/questions/validate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify({
+                    question: question,
+                    answer: answerInput
+                })
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            totalAnswered++;
+            if (data.isCorrect) {
+                correctAnswers += 1;
+                alert('¡Respuesta correcta!');
+            } else {
+                incorrectAnswers += 1;
+                alert('Respuesta incorrecta.');
+            }
+
+            // Guarda el progreso después de actualizar las respuestas
+            await saveProgress();
+            nextQuestion();
+        } catch (error) {
+            console.error('Error validando la respuesta:', error);
+        }
+    });
+
+
+    // Manejar el evento de 'No sé'
+    document.getElementById('skip-button').addEventListener('click', nextQuestion);
+
+    // Función para cargar la siguiente pregunta
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex <= maxQuestions) {
+            document.getElementById('answer-input').value = ''; // Limpiar la respuesta previa
+            loadQuestion(); // Cargar la siguiente pregunta
+            updateProgressBar(); // Actualizar la barra de progreso
+        } else {
+            alert('Has completado todas las preguntas.');
+            window.location.href = '/dashboard'; // Redirigir al terminar
+        }
+    }
+
+    async function saveProgress() {
+        const progressData = {
+            totalAnswered: totalAnswered,
+            correctAnswers: correctAnswers,
+            wrongAnswers: incorrectAnswers,
+            currentQuestionIndex: currentQuestionIndex
+        };
+
+        try {
+            const response = await fetch(`/dashboard/${topic}/progress`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(progressData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al guardar el progreso');
+            }
+
+            const data = await response.json(); // Asegúrate de que el servidor responda con JSON si es necesario
+            console.log('Progreso guardado:', data);
+        } catch (error) {
+            console.error('Error al guardar el progreso:', error);
+        }
+    }
+
+    // Cargar la primera pregunta al inicio
+    loadProgress().then(loadQuestion)
+</script>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Módulos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e4f0;
+            padding-bottom: 20px;
+        }
+
+        .header h2 {
+            font-size: 1.75rem;
+            color: rgb(24, 29, 43);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .recommendations {
+            background-color: #e0e4f0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .recommendations h3 {
+            font-size: 1.3rem;
+            color: rgb(24, 29, 43);
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recommendations ul li {
+            margin-bottom: 10px;
+        }
+
+        .recommendations ul li a {
+            color: #0079ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .recommendations ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .module-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .module-card {
+            background-color: #e0e4f0;
+            width: 30%;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .module-card h3 {
+            font-size: 1.3rem;
+            color: rgb(24, 29, 43);
+            margin-bottom: 1rem;
+        }
+
+        .module-card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-card button {
+            background-color: #0087ff;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .module-card button:hover {
+            background-color: #0079ff;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include(`./partials/navbar`)%>
+        <div class="main-content">
+            <!-- Sección del saludo del usuario -->
+            <div class="header">
+                <h2>Hola, <%= user.name %>!</h2> <!-- Dinámicamente muestra el nombre del usuario -->
+                <p>Bienvenido de nuevo. Aquí tienes algunas recomendaciones para ti:</p>
+            </div>
+
+            <!-- Recomendaciones de la IA -->
+            <div class="recommendations">
+                <h3>Recomendaciones de la IA</h3>
+                <a href="#" class="text-recommedations" style="text-decoration: none; color: #353535;">
+                    <%= recommendations %>
+                </a>
+            </div>
+
+            <!-- Texto de selección de módulo -->
+            <h2>Selecciona un módulo para comenzar</h2>
+
+            <!-- Módulos disponibles -->
+            <div class="module-container">
+                <% if (selectedTopics && selectedTopics.length > 0) { %>
+                    <% selectedTopics.forEach(function(topic) { %>
+                        <div class="module-card">
+                            <h3>
+                                <%= topic.name %>
+                            </h3>
+                            <p>
+                                Preguntas respondidas: <%= topic.totalAnswered %> <br>
+                    Respuestas correctas: <%= topic.correctAnswers %> <br>
+                    Respuestas incorrectas: <%= topic.wrongAnswers %>
+                            </p>
+                            <button onclick="handleClick('<%= topic.name %>')">Comenzar</button>
+                        </div>
+                        <% }) %>
+                            <% } else { %>
+                                <p>No tienes módulos seleccionados aún.</p>
+                                <% } %>
+            </div>
+        </div>
+
+        <script>
+            function handleClick(topic) {
+                window.location.href = `/dashboard/${topic}`;
+            }
+        </script>
+</body>
+
+</html>

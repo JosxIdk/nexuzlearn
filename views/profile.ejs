@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Page Profile</title>
+    <link rel="stylesheet" href="/public/profile.css">
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+    <div class="profile-page">
+        <!-- Customizable Banner -->
+        <div class="banner">
+            <img src="/public/xdddd_a.gif" alt="Custom Banner" class="banner-img">
+        </div>
+
+        <!-- Profile detalles -->
+        <div class="profile-details">
+            <!-- Logo y User Name -->
+            <div class="logo-section">
+                <img src="https://api.dicebear.com/9.x/adventurer/svg" alt="User Logo" class="profile-logo">
+                <h2 class="user-name"><%- user.name %></h2>
+            </div>
+        </div>
+
+        <!-- Informaciones Generales -->
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Date Joined</h3>
+                <p><%- user.createdAt.toDateString() %></p>
+            </div>
+            <div class="info-box">
+                <h3>Total Problems Solved</h3>
+                <p>
+                    <% 
+                    const totalAnswered = progressData.reduce((sum, topic) => sum + topic.totalAnswered, 0);
+                    %>
+                    <%- totalAnswered %>
+                </p>
+            </div>
+            <div class="info-box">
+                <h3>Total Correct Answers</h3>
+                <p>
+                    <% 
+                    const totalCorrect = progressData.reduce((sum, topic) => sum + topic.correctAnswers, 0);
+                    %>
+                    <%- totalCorrect %>
+                </p>
+            </div>
+            <div class="info-box">
+                <h3>Total Incorrect Answers</h3>
+                <p>
+                    <% 
+                    const totalWrong = progressData.reduce((sum, topic) => sum + topic.wrongAnswers, 0);
+                    %>
+                    <%- totalWrong %>
+                </p>
+            </div>
+        </div>
+
+        <!-- Sección de Progreso -->
+        <%- include('./partials/progress') %>
+        
+    </div>
+    <%- include('./partials/footer') %>
+</body>
+</html>

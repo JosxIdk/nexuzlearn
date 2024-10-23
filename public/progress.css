@@ -1,0 +1,64 @@
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.progress-section {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+h2 {
+    color: #00695c;
+}
+
+.progress-bar {
+    margin: 20px 0;
+}
+
+.label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.bar-container {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 5px;
+    position: relative;
+}
+
+.bar {
+    background-color: #3b82f6;
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+.bar.complete {
+    background-color: #4caf50;
+}
+
+.bar.error {
+    background-color: #f44336;
+}
+
+.helper-text {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.error-text {
+    color: #f44336;
+}

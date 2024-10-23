@@ -1,0 +1,138 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: 
+  radial-gradient(circle at 20% 30%, #d0e9ff, transparent 8%),
+  radial-gradient(circle at 60% 70%, #ffffff, transparent 20%),
+  radial-gradient(circle at 40% 50%, #d0e9ff, transparent 20%),
+  radial-gradient(circle at 80% 40%, #ffffff, transparent 20%),
+  radial-gradient(circle at 30% 80%, #d0e9ff, transparent 20%),
+  linear-gradient(to right, #d0e9ff, #ffffff, #d0e9ff);
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+
+.register-section {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.register-container {
+    flex: 1;
+}
+
+.register-container h2 {
+    font-size: 2.2rem;
+    color: #0069cd;
+    margin-bottom: 20px;
+}
+
+.register-form .input-group {
+    margin-bottom: 20px;
+}
+
+.register-form .input-group label {
+    font-size: 1.2rem;
+    color: #0069cd;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.register-form .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #0069cd;
+    border-radius: 5px;
+    color: #000000;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.register-form .input-group input:focus {
+    border-color: #0069cd;
+}
+
+.btn-primary {
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 15px 20px;
+    height: 40px;
+    border-radius: 0.7em;
+    background-color: #0069cd;
+    color: #fff;
+    border: 1px solid #0069cd;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+}
+
+.btn-primary:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-primary:hover {
+    background-color: #ffffff;
+    color: #0069cd;
+}
+
+.illustration {
+    flex: 1;
+    text-align: right;
+}
+
+.illustration img {
+    max-width: 500px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); 
+    }
+    100% {
+        transform: translateY(0); 
+    }
+}
+@media (max-width: 1000px) {
+    .illustration {
+        display: none;
+    }
+}

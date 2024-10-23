@@ -1,0 +1,416 @@
+body {
+    background-color: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#firstcontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    background-image: 
+        radial-gradient(circle at 20% 30%, #d0e9ff, transparent 8%),
+        radial-gradient(circle at 60% 70%, #ffffff, transparent 20%),
+        radial-gradient(circle at 40% 50%, #d0e9ff, transparent 20%),
+        radial-gradient(circle at 80% 40%, #ffffff, transparent 20%),
+        radial-gradient(circle at 30% 80%, #d0e9ff, transparent 20%),
+        linear-gradient(to right, #d0e9ff, #ffffff, #d0e9ff);
+    color: white;
+    padding: 0 40px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+h1 {
+    font-family: "Montserrat";
+    color: #0069cd;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#highlight {
+    font-size: 50px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#textcontent {
+    margin: auto;
+    width: 40%;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#title {
+    font-size: 40px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.start-button {
+    background: #0069cd;
+    color: white;
+    font-family: inherit;
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em #0069cd;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+    cursor: pointer;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.start-button .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #0069cd;
+    right: 0.3em;
+    transition: all 0.3s;
+}
+
+.start-button:hover .icon {
+    width: calc(100% - 0.6em);
+}
+
+.start-button .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #0069cd;
+}
+
+.start-button:hover .icon svg {
+    transform: translateX(0.1em);
+}
+
+.start-button:active .icon {
+    transform: scale(0.95);
+}
+
+#imagecontent {
+    margin: auto;
+    text-align: center;
+    width: 40%;
+}
+
+#imagecontent img {
+    height: 400px;
+}
+
+#pc {
+    position: relative;
+    top: 40px;
+    left: -40px;
+    height: 600px;
+    transform-origin: -150px 0;
+    animation: float 4s ease-in-out infinite;
+}
+
+#secondtittle {
+    color: rgb(236, 236, 236);
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#explainsection {
+    height: 1280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: #0069cd;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.explainimgs {
+    height: 300px;
+}
+
+.explainntittle {
+    color: white;
+    font-size: 30px;
+    position: relative;
+    bottom: 20px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.explainnp {
+    color: white;
+    font-size: 20px;
+    left: 20px;
+    font-weight: 400;
+    position: relative;
+    bottom: 20px;
+    width: 400px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+@media (max-width: 768px) {
+    .explainnp {
+        display: none;
+    }
+}
+
+.templates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    width: 500px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.templates.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lines,
+#line2 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.lines.visible,
+#line2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#template1 {
+    position: relative;
+    top: 70px;
+    right: 350px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#template2 {
+    position: relative;
+    top: 40px;
+    left: 270px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#template3 {
+    position: relative;
+    top: 20px;
+    right: 350px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.lines {
+    position: absolute;
+    height: 200px;
+    right: 135px;
+    top: 250px;
+}
+
+#lines2 {
+    position: absolute;
+    height: 200px;
+    right: 135px;
+    top: 890px;
+}
+
+#templatescomplete {
+    position: relative;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+#explainsection2 {
+    background-color: rgb(24, 29, 43);
+    height: 100vh;
+    width: 100%;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.faq-section {
+    padding: 90px 0;
+    max-width: 1000px;
+    margin: auto;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 40px;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.faq-question {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #f9f9f9;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.faq-question:hover {
+    background-color: #ddd;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 15px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+.faq-item.active .faq-answer {
+    max-height: 100px;
+    padding: 15px;
+}
+
+p {
+    font-weight: 600;
+    word-break: break-word; /* Añadido para romper palabras */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 410px) {
+    #imagecontent {
+        display: none;
+    }
+}
+
+@media (max-width: 786px) {
+    #textcontent {
+        margin-top: 70px;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 1000px) {
+    #firstcontent {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    #textcontent, #imagecontent {
+        width: 100%;
+    }
+
+    #title {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    #highlight {
+        font-size: 40px;
+    }
+
+    .start-button {
+        width: 100%;
+    }
+
+    #imagecontent img {
+        height: 300px;
+    }
+
+    #pc {
+        height: 400px;
+        top: 0;
+        left: 0;
+    }
+
+    #explainsection {
+        height: auto;
+        padding: 40px 0;
+    }
+
+    .explainimgs {
+        height: 150px;
+    }
+
+    .explainntittle {
+        font-size: 20px;
+    }
+
+    .explainnp {
+        font-size: 16px;
+    }
+
+    .templates {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .lines, #lines2 {
+        display: none;
+    }
+
+    #template1, #template2, #template3 {
+        position: static;
+        margin: 20px 0;
+    }
+
+    #explainsection2 {
+        height: auto;
+        padding: 40px 0;
+    }
+
+    .faq-section {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .faq-question {
+        font-size: 16px;
+    }
+
+    .faq-answer {
+        font-size: 14px;
+    }
+}

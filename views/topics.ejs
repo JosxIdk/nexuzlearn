@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Topics</title>
+    <link rel="stylesheet" href="/public/topics.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Selecciona los temas que deseas reforzar</h2>
+        <form id="topics-form" action="/select-topics" method="post">
+            <label><input type="checkbox" name="topics" value="Matematicas"> Matemáticas</label><br>
+            <label><input type="checkbox" name="topics" value="Fisica"> Física</label><br>
+            <label><input type="checkbox" name="topics" value="Pensamiento Logico"> Pensamiento Lógico</label><br>
+            <label><input type="checkbox" name="topics" value="Pensamiento Critico"> Pensamiento Critico</label><br>
+            <label><input type="checkbox" name="topics" value="Ciencias Computacionales"> Ciencias Computacionales</label><br>
+            <label><input type="checkbox" name="topics" value="Ingles"> Inglés</label><br>
+            <label><input type="checkbox" name="topics" value="Quimica"> Química</label><br>
+           
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

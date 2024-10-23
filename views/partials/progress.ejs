@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progreso del Usuario</title>
+    <link rel="stylesheet" href="/public/progress.css">
+</head>
+<body>
+    <div class="progress-section">
+        <h2>Progreso del Usuario</h2>
+        <p>Historial Reciente</p>
+
+        <% progressData.forEach(topic => { %>
+            <div class="progress-bar">
+                <div class="label">
+                    <span><a href="/dashboard/<%- topic.name %>"><%= topic.name %></a></span>
+                    <span><%= topic.progress %>%</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar" style="width: <%= topic.progress %>%; background-color: <%= topic.progress < 50 ? '#f44336' : (topic.progress < 80 ? '#ff9800' : '#4caf50') %>;">
+                    </div>
+                    
+                </div>
+                <div class="helper-text">
+                    <%= topic.totalAnswered > 0 ? '- Total Respondidas: ' + topic.totalAnswered : '- Sin datos'; %>
+                    <br>
+                    <%= topic.correctAnswers > 0 ? 'Respuestas Correctas: ' + topic.correctAnswers : ''; %>
+                    <%= topic.wrongAnswers > 0 ? ' | Respuestas Incorrectas: ' + topic.wrongAnswers : ''; %>
+                </div>
+            </div>
+        <% }); %>
+
+    </div>
+</body>
+</html>
