@@ -9,7 +9,8 @@ const openai = new OpenAI({
 async function getAIProfileAdaptation(user, selectedTopics) {
     const prompt = `
         El usuario ${user.name} ha seleccionado los siguientes temas para reforzar: ${selectedTopics.join(", ")}.
-        Encargate de darle una buena bienvenida acogedora, algo motivacional y que lo incentive a aprender
+        Encargate de darle una buena bienvenida acogedora, algo motivacional y que lo incentive a aprender. No des un texto extenso, que el texto sea
+        de minimo 25 caracteres.
     `;
 
     try {
