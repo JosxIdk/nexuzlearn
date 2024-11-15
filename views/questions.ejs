@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificación de conocimientos</title>
     <link rel="stylesheet" href="/public/questions.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -80,6 +81,9 @@
             console.log('Pregunta cargada:', data);
             document.getElementById('question-text').innerHTML = data.question;
             document.getElementById('question-number').textContent = currentQuestionIndex;
+
+
+            MathJax.typeset();
         } catch (error) {
             console.error('Error cargando la pregunta:', error);
             document.getElementById('question-text').textContent = 'Error al cargar la pregunta.';
@@ -175,7 +179,11 @@
     }
 
     // Cargar la primera pregunta al inicio
-    loadProgress().then(loadQuestion)
+    loadProgress().then(() => {
+
+        updateProgressBar();
+        loadQuestion();
+    })
 </script>
 
 </html>

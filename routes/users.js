@@ -229,11 +229,10 @@ router.get('/dashboard/:topic/questions', async (req, res) => {
         }
 
         const questions = await generateQuestions(topic);
-        console.log(questions)
-        const question = questions.content;
-        console.log(question)
+        const { content } = questions;
+        console.log(content)
 
-        res.status(200).json({ topic: topic, question: question });
+        res.status(200).json({ topic: topic, question: content });
     } catch (error) {
         console.error('Error generando preguntas:', error);
         res.status(500).send('Error generando preguntas');
