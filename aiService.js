@@ -65,8 +65,8 @@ async function checkPlagiarismWithAI(text) {
                 role: "assistant", content: prompt
             }
         ],
-        max_tokens: 10,  
-        temperature: 0.7, 
+        max_tokens: 50,  
+        temperature: 0.5, 
     });
 
     return response.choices[0].message;
@@ -89,19 +89,26 @@ async function checkForAIGeneratedContent(text) {
     return response.choices[0].message;
 }
 
-async function validateAnswer(question, answer){
+async function validateAnswer(question, answer) {
     const response = await openai.chat.completions.create({
-        model: 'gpt-4o-mini', 
+        model: 'gpt-4o-mini',
         messages: [
-            { role: "system", content: `Eres un maestro que se enfoca en todas las áreas de conocmiento. Solo acepta respuestas totalmente correctas y en caso de preguntas de matematicas consulta en internet para no confundir a los usuarios cuando ingresen una respuesta correcta.¿.` },
-            { role: "user", content: `Pregunta: ${question}\nRespuesta del usuario: ${answer}\nPor favor, determina si la respuesta es correcta o no respondiendo con "Sí." o "No.", y proporciona una breve explicación de por qué es correcta o incorrecta.` }
+            { 
+                role: "system", 
+                content: `Eres un maestro experto en todas las áreas de conocimiento. Evalúa respuestas de los estudiantes con precisión y, si la respuesta es incorrecta, proporciona la respuesta correcta. En caso de preguntas de matemáticas, consulta en internet para garantizar exactitud.` 
+            },
+            { 
+                role: "user", 
+                content: `Pregunta: ${question}\nRespuesta del usuario: ${answer}\nPor favor, determina si la respuesta es correcta o incorrecta. Responde con "Sí." o "No.",y si es incorrecta, incluye la respuesta correcta.` 
+            }
         ],
-        max_tokens: 50,  
-        temperature: 0.7, 
+        max_tokens: 100, // Aumentado para incluir la explicación y la respuesta correcta
+        temperature: 0.7,
     });
 
     return response.choices[0].message;
 }
+
 
 module.exports = {
     getAIProfileAdaptation,

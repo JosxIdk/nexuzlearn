@@ -7,6 +7,7 @@
     <title>Verificación de conocimientos</title>
     <link rel="stylesheet" href="/public/questions.css">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -102,6 +103,28 @@
         const question = document.getElementById('question-text').textContent;
 
         try {
+
+            const plagiarismResponse = await fetch('/check-plagiarism', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify({ answer: answerInput })
+            })
+
+            const plagiarismData = await plagiarismResponse.json();
+
+            if (!plagiarismData.isValid) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Tu respuesta no cumple con los requisitos de originalidad o fue generada por IA',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+                return;
+            }
+
+
             const response = await fetch(`/dashboard/${topic}/questions/validate`, {
                 method: 'POST',
                 headers: {
@@ -119,10 +142,20 @@
             totalAnswered++;
             if (data.isCorrect) {
                 correctAnswers += 1;
-                alert('¡Respuesta correcta!');
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Tu respuesta es correcta!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
             } else {
                 incorrectAnswers += 1;
-                alert('Respuesta incorrecta.');
+                Swal.fire({
+                    title: 'Error!',
+                    html: `Tu respuesta es incorrecta.<br>La respuesta correcta es: <strong>${data.correctAnswer}</strong>`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
             }
 
             // Guarda el progreso después de actualizar las respuestas
@@ -145,7 +178,12 @@
             loadQuestion(); // Cargar la siguiente pregunta
             updateProgressBar(); // Actualizar la barra de progreso
         } else {
-            alert('Has completado todas las preguntas.');
+            Swal.fire({
+                    title: 'Excelente!',
+                    text: '¡Haz completado todas las preguntas!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
             window.location.href = '/dashboard'; // Redirigir al terminar
         }
     }

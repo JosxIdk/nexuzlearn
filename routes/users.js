@@ -18,7 +18,7 @@ require('dotenv').config()
 router.get('/', async (req, res, next) => {
     try {
 
-        console.log(req.user)
+        console.log(req.isAuthenticated())
 
         if(req.user && !req.cookies.user){
             res.cookie("user",{
@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
           }
 
         res.render('index', {
-            user: req.isAuthenticated(),
+            user: req.user,
             t: req.t,
         });
     } catch (error) {
@@ -244,20 +244,28 @@ router.post('/dashboard/:topic/questions/validate', async (req, res) => {
 
     try {
         const validateResponse = await validateAnswer(question, answer);
-        console.log(validateResponse)
-        let isCorrect;
-        if (validateResponse.content.includes("Sí.")) {
-            isCorrect = true;
-        } else if (validateResponse.content.includes("No.")) {
-            isCorrect = false;
+        console.log(validateResponse);
+
+        let isCorrect = validateResponse.content.includes("Sí.");
+        let correctAnswer = null;
+
+        if (!isCorrect) {
+            // Extraer la respuesta correcta de la respuesta del modelo
+            const match = validateResponse.content.match(/La respuesta correcta es:? (.+)/i);
+            console.log(match)
+            if (match && match[1]) {
+                correctAnswer = match[1];
+                console.log(correctAnswer)
+            }
         }
 
-        res.json({ isCorrect });
+        res.json({ isCorrect, correctAnswer });
     } catch (err) {
-        console.error('Error al verificar plagio:', err);
-        res.status(500).json({ error: 'Error al verificar plagio' });
+        console.error('Error al validar la respuesta:', err);
+        res.status(500).json({ error: 'Error al validar la respuesta' });
     }
-})
+});
+
 
 router.post('/dashboard/:topic/progress', async (req, res) => {
     const { topic } = req.params;
